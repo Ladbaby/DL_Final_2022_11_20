@@ -48,15 +48,14 @@ def get_latex_ocrdata(path,mode = 'val'):
             continue
         if img is None:
             continue
-        size = (img.shape[1],img.shape[0])
+        size = [img.shape[1],img.shape[0]]
         del img
         temp = formula[int(i.split()[1])].replace('\\n','')
         # token = set()
         for j in temp.split():
             # token.add(j)
             vocab_temp.add(j)
-        data[i.split()[0]] = {'img_path':img_path,'size':size,
-        'caption':temp,'caption_len':len(temp.split())+2}#这里需要加上开始以及停止符
+        data[i.split()[0]] = {"img_path":img_path,"size":size,"caption":temp,"caption_len":len(temp.split())+2}#这里需要加上开始以及停止符
         # data[i.split()[0]] = {'img_path':path + 'images/images_' + mode + '/' + i.split()[0],
         # 'token':list(token),'caption':temp,'caption_len':len(temp.split())+2}#这里需要加上开始以及停止符
     vocab_temp = list(vocab_temp)
@@ -170,8 +169,8 @@ class AverageMeter(object):
 
     def update(self, val, n=1):
         self.val = val
-        self.sum += val * n
-        self.count += n
+        self.sum = self.sum + val * n
+        self.count = self.sum + n
         self.avg = self.sum / self.count
 
 

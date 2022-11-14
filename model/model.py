@@ -116,7 +116,8 @@ class Encoder(nn.Module):
                 signal = signal.unsqueeze(0)
             for _ in range(num_dims - 1 - dim):  # 1, 0
                 signal = signal.unsqueeze(-2)
-            x += signal  # [1, 14, 1, 512]; [1, 1, 14, 512]
+            # x += signal  # [1, 14, 1, 512]; [1, 1, 14, 512]
+            x = x + signal
         return x
 
 class Attention(nn.Module):
@@ -265,6 +266,8 @@ class DecoderWithAttention(nn.Module):
                     torch.cat([embeddings[:batch_size_t, t, :], attention_weighted_encoding], dim=1),
                     h[:batch_size_t])  # (batch_size_t, decoder_dim)
             else:
+                print(predictions)
+                print(predictions[:batch_size_t, t, :])
                 h = self.decode_step(
                     torch.cat([self.embedding(torch.argmax(predictions[:batch_size_t, t, :],dim = 1)), attention_weighted_encoding], dim=1),
                     h[:batch_size_t])  # (batch_size_t, decoder_dim)

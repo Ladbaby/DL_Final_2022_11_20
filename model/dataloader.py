@@ -132,7 +132,7 @@ class formuladataset(object):
                     if len(img_batch)==0:
                         break
                     for ii in range(len(cap_batch)):
-                        cap_batch[ii] += [vocab['<pad>']]*(int(max(cap_len_batch))-len(cap_batch[ii]))
+                        cap_batch[ii] = cap_batch[ii] + [vocab['<pad>']]*(int(max(cap_len_batch))-len(cap_batch[ii]))
                     cap_batch = torch.LongTensor(cap_batch)
                     yield torch.cat(img_batch,dim = 0),cap_batch,cap_len_batch
                     img_batch,cap_batch,cap_len_batch = [],[],torch.zeros(self.batch_size).int()

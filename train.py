@@ -144,6 +144,8 @@ def train(train_loader, encoder, decoder, criterion, encoder_optimizer,decoder_o
     :param epoch: epoch number
     """
 
+    torch.autograd.set_detect_anomaly(True)
+
     decoder.train()  # train mode (dropout and batchnorm is used)
     encoder.train()
 

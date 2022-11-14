@@ -15,6 +15,8 @@ image_input_dir_train = "./datasets_no_test/train/images/"# '../data/210618/form
 image_input_dir_val = "./datasets_no_test/dev/images/"
 image_output_dir = './data/CROHME/images/'
 
+matching_output_dir = "./data/CROHME/matching/"
+
 if not os.path.isdir(output_dir):
     os.mkdir(output_dir)
 if not os.path.isdir(image_output_dir):
@@ -23,6 +25,8 @@ if not os.path.isdir(image_output_dir):
     os.mkdir(image_output_dir + 'images_val/')
     os.mkdir(image_output_dir + 'images_test/')
 
+if not os.path.isdir(matching_output_dir):
+    os.mkdir(matching_output_dir)
 # label_name_list_train = os.listdir(input_dir_train)
 # label_name_list_test = os.listdir(input_dir_test)
 # label_name_list_val = os.listdir(input_dir_val)
@@ -50,23 +54,27 @@ val_list = os.listdir(input_dir_val)
 #     else:
 #         test_list.append(label_name_list[i])
 
-with open(output_dir + 'train.formulas.norm.txt', 'w', encoding='utf-8') as f1:
+# with open(output_dir + 'train.formulas.norm.txt', 'w', encoding='utf-8') as f1:
+with open(matching_output_dir + "train.matching.txt", "w", encoding="utf-8") as matching_file:
     for i in tqdm(range(len(train_list))):
         train_label_name = train_list[i]
         image_name = train_label_name[:-4] + '.png'
-        shutil.copy(image_input_dir_train + image_name, image_output_dir + 'images_train/' + str(i) + '.png')
-        with open(input_dir_train + train_label_name, 'r', encoding='utf-8') as f2:
-            line = f2.read()
-            f1.write(line + '\n')
+        matching_file.write(image_name + ' ' + train_label_name[:-4] + '\n')
+            # shutil.copy(image_input_dir_train + image_name, image_output_dir + 'images_train/' + str(i) + '.png')
+            # with open(input_dir_train + train_label_name, 'r', encoding='utf-8') as f2:
+            #     line = f2.read()
+            #     f1.write(line + '\n')
 
-with open(output_dir + 'val.formulas.norm.txt', 'w', encoding='utf-8') as f1:
+# with open(output_dir + 'val.formulas.norm.txt', 'w', encoding='utf-8') as f1:
+with open(matching_output_dir + "val.matching.txt", "w", encoding="utf-8") as matching_file:
     for i in tqdm(range(len(val_list))):
         val_label_name = val_list[i]
         image_name = val_label_name[:-4] + '.png'
-        shutil.copy(image_input_dir_val + image_name, image_output_dir + 'images_val/' + str(i) + '.png')
-        with open(input_dir_val + val_label_name, 'r', encoding='utf-8') as f2:
-            line = f2.read()
-            f1.write(line + '\n')
+        matching_file.write(image_name + ' ' + val_label_name[:-4] + '\n')
+            # shutil.copy(image_input_dir_val + image_name, image_output_dir + 'images_val/' + str(i) + '.png')
+            # with open(input_dir_val + val_label_name, 'r', encoding='utf-8') as f2:
+            #     line = f2.read()
+            #     f1.write(line + '\n')
 
 # with open(output_dir + 'test.formulas.norm.txt', 'w', encoding='utf-8') as f1:
 #     for i in tqdm(range(len(test_list))):

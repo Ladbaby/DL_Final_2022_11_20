@@ -3,8 +3,8 @@ import torch
 import math
 from torch import nn
 import torch.nn.functional as F
-# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-device = "cpu"
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# device = "cpu"
 
 class Encoder(nn.Module):
     def __init__(self):

@@ -1,7 +1,8 @@
-/data/full
-/data/CROHME
+# /data/full
+# /data/CROHME
 /data/*
 /datasets_no_test/*
+/LaTeX_OCR_PRO-master/*
 /other
 # Byte-compiled / optimized / DLL files
 __pycache__/
